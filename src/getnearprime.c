@@ -6,51 +6,33 @@
 /*   By: Pablo Escobar <sataniv.rider@gmail.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/22 20:26:40 by Pablo Escob       #+#    #+#             */
-/*   Updated: 2024/08/22 20:26:58 by Pablo Escob      ###   ########.fr       */
+/*   Updated: 2024/08/22 20:42:27 by Pablo Escob      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
+#include "../hdrs/gnp_service.h"
+#include "../libft/libft.h"
+#include "../ft_pow/hdrs/ft_pow.h"
 #include <stdlib.h>
 
-t_uchar	*initarray(unsigned long num)
+t_ulong	setstartnum(t_ulong num)
 {
-	t_uchar	*tmp;
+	t_ulong	tmp;
 
-	tmp = malloc((num + 1) * sizeof(t_uchar));
-	if (!tmp)
-	{
-		ft_perror("ERROR: Bad alocation mammory");
-		exit(-1);
-	}
-	*tmp = 0;
-	tmp[1] = 0;
+	if (num <= GNP_MAXNUM)
+		return (num);
+	tmp = (t_ulong)ft_sqrt(num);
+	while (tmp > GNP_MAXNUM)
+		tmp = (t_ulong)ft_sqrt(num);
 	return (tmp);
 }
 
-t_uchar	*ft_getmarkprimes(unsigned long num)
+t_ulong	getnearprime(t_ulong num)
 {
-	unsigned long		j;
-	unsigned long		i;
-	t_uchar				*tmp;
-
-	if (num < 2)
-		return (NULL);
-	tmp = initarray(num);
-	i = 1;
-	while (++i <= num)
-		tmp[i] = 1;
-	i = 1;
-	while (++i <= num)
-	{
-		if (tmp[i])
-		{
-			j = i * i;
-			while (j <= num)
-			{
-				tmp[j] = 0;
-				j += i;
-			}
-		}
-	}
-	return (tmp);
+	t_uchar	*startprimes;
+	
+	startprimes = ft_getmarkprimes(setstartnum(num));
+	if (!startprimes)
+		return (0);
+	
 }
