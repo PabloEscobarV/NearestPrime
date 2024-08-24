@@ -6,10 +6,10 @@
 /*   By: Pablo Escobar <sataniv.rider@gmail.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/22 20:27:25 by Pablo Escob       #+#    #+#             */
-/*   Updated: 2024/08/22 20:40:05 by Pablo Escob      ###   ########.fr       */
+/*   Updated: 2024/08/24 15:31:16 by Pablo Escob      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #pragma once
 
-#define GNP_MAXNUM	8000
+#define GNP_MAXARRSIZE	5
