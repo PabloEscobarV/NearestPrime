@@ -6,54 +6,54 @@
 /*   By: Pablo Escobar <sataniv.rider@gmail.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/28 16:59:39 by Pablo Escob       #+#    #+#             */
-/*   Updated: 2024/08/28 17:04:10 by Pablo Escob      ###   ########.fr       */
+/*   Updated: 2024/08/29 20:06:16 by Pablo Escob      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../hdrs/gnp_service.h"
 #include "../libft/libft.h"
 
-static t_ulong	getmin(t_ulong prime, t_ulong minnum)
+static t_ulong	getmin(t_ulong prime, t_ulong min)
 {
-	if (minnum == prime)
-		minnum *= prime;
-	if (minnum < prime)
-		minnum = prime + 1;
-	while (minnum % prime)
-		++minnum;
-	return (minnum);
+	if (min == prime)
+		min *= prime;
+	if (min < prime)
+		min = prime + 1;
+	while (min % prime)
+		++min;
+	return (min);
 }
 
-static void	setnprm(t_uchar *primearr, t_ulong maxnum, t_ulong minnum, t_ulong prm)
+static void	setnprm(t_uchar *primearr, t_ulong max, t_ulong min, t_ulong prm)
 {
 	t_ulong	i;
 
-	if (minnum < 2)
+	if (min < 2)
 		i = getmin(prm, prm);
 	else
-		i = getmin(prm, minnum);
-	while (i <= maxnum)
+		i = getmin(prm, min);
+	while (i <= max)
 	{
-		resetbit(&(primearr[(i - minnum) / FT_BIT_MAX]),
-			(i - minnum) % FT_BIT_MAX);
+		resetbit(&(primearr[(i - min) / FT_BIT_MAX]),
+			(i - min) % FT_BIT_MAX);
 		i += prm;
-	}		
+	}
 }
 
-t_uchar	*setnonprime(t_llist *primenums, t_ulong maxnum, t_ulong minnum)
+t_uchar	*setnonprime(t_llist *primenums, t_ulong max, t_ulong min)
 {
-	t_uchar *primearr;
+	t_uchar	*primearr;
 
-	primearr = initprimearray(maxnum - minnum + 2);
-	if (minnum < 2)
+	primearr = initprimearray(max - min + 2);
+	if (min < 2)
 	{
 		resetbit(&(*primearr), 0);
 		resetbit(&(*primearr), 1);
 	}
-	while (primenums && *(int *)primenums->data <= maxnum)
+	while (primenums && *(int *)primenums->data <= max)
 	{
-		setnprm(primearr, maxnum,
-			minnum, *(int *)primenums->data);
+		setnprm(primearr, max,
+			min, *(int *)primenums->data);
 		primenums = primenums->next;
 	}
 	return (primearr);

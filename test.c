@@ -6,10 +6,11 @@
 /*   By: Pablo Escobar <sataniv.rider@gmail.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/28 17:10:48 by Pablo Escob       #+#    #+#             */
-/*   Updated: 2024/08/28 17:32:13 by Pablo Escob      ###   ########.fr       */
+/*   Updated: 2024/08/29 19:47:47 by Pablo Escob      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
+#include "libft/libft.h"
 #include "hdrs/getnearprime.h"
 #include <stdio.h>
 
@@ -36,10 +37,13 @@ void	printdata(void *data)
 	printf("PRIME NUMBER:\t%d\n", *(int *)data);
 }
 
-int	main()
+int	main(int argc, char **argv)
 {
-	t_ulong	num = 10523;
+	t_ulong	num;
 
+	if (argc != 2)
+		return (-1);
+	num = ft_atoi(argv[1]);
 	num = getnearestprime(num);
 	printf("RSULT:\t%ld\n", num);
 	return (0);

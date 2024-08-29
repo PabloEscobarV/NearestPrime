@@ -6,7 +6,7 @@
 #    By: Pablo Escobar <sataniv.rider@gmail.com>    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/08/28 17:12:44 by Pablo Escob       #+#    #+#              #
-#    Updated: 2024/08/28 17:35:44 by Pablo Escob      ###   ########.fr        #
+#    Updated: 2024/08/29 20:03:11 by Pablo Escob      ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -29,7 +29,12 @@ OBJ = $(SRC:$(SRCDIR)/%.c=$(OBJDIR)/%.o)
 
 CC = gcc
 CFLAGSO = -Wall -Wextra -Werror
-LFLAGS = -L$(FT_POW_DIR) -l$(FTPOW) -L$(LIBFTDIR) -l$(LIBFT)
+LIBF_THIS = -L. -l$(NAME)
+LIBF_FT = -L$(LIBFTDIR) -l$(LIBFT)
+LIBF_FTPOW = -L$(FT_POW_DIR) -l$(FTPOW)
+LFLAGS = $(LIBF_FT) $(LIBF_FTPOW)
+
+LOPT = -o2
 
 .PHONY: all, re, run, clean, fclean
 
@@ -38,7 +43,8 @@ all: lib
 lib: $(LIBNAME)
 
 run: lib
-	$(CC) $(CFLAGSO) $(LIBNAME) $(LFLAGS) $(TESTFILE) -o $(TESTNAME)
+	@$(CC) $(CFLAGSO) $(TESTFILE) $(OBJ) $(LFLAGS) $(LOPT) -o $(TESTNAME)
+	./$(TESTNAME) 1000
 
 clean:
 	$(MAKE) -C $(LIBFTDIR) clean
@@ -50,10 +56,12 @@ fclean: clean
 	$(MAKE) -C $(FT_POW_DIR) fclean
 	rm -f $(TESTNAME) $(LIBNAME)
 
+re: fclean all
+
 $(LIBNAME): $(OBJ)
 	$(MAKE) -C $(LIBFTDIR)
 	$(MAKE) -C $(FT_POW_DIR)
-	ar -rc $(LIBNAME) $(OBJ) $(LIBFTDIR)/$(OBJDIR)/*.o $(FT_POW_DIR)/$(OBJDIR)/*.o
+	ar -rc $(LIBNAME) $(OBJ)
 	ranlib $(LIBNAME)
 
 $(OBJDIR)/%.o: $(SRCDIR)/%.c

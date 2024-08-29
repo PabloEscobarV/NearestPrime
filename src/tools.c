@@ -6,10 +6,9 @@
 /*   By: Pablo Escobar <sataniv.rider@gmail.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/28 16:58:20 by Pablo Escob       #+#    #+#             */
-/*   Updated: 2024/08/28 17:00:45 by Pablo Escob      ###   ########.fr       */
+/*   Updated: 2024/08/29 20:05:25 by Pablo Escob      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
-
 
 #include "../hdrs/gnp_service.h"
 #include "../libft/libft.h"
@@ -33,7 +32,7 @@ t_ulong	getprime(t_ulong maxnum, t_uchar *primearr)
 	while (maxnum >= 0)
 	{
 		if (primearr[maxnum])
-			break;
+			break ;
 		--maxnum;
 	}
 	free(primearr);
