@@ -6,7 +6,7 @@
 #    By: Pablo Escobar <sataniv.rider@gmail.com>    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/08/28 17:12:44 by Pablo Escob       #+#    #+#              #
-#    Updated: 2024/08/29 20:03:11 by Pablo Escob      ###   ########.fr        #
+#    Updated: 2024/09/12 08:51:40 by Pablo Escob      ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -61,7 +61,7 @@ re: fclean all
 $(LIBNAME): $(OBJ)
 	$(MAKE) -C $(LIBFTDIR)
 	$(MAKE) -C $(FT_POW_DIR)
-	ar -rc $(LIBNAME) $(OBJ)
+	ar -rc $(LIBNAME) $(OBJ) $(FT_POW_DIR)/$(OBJDIR)/*.o
 	ranlib $(LIBNAME)
 
 $(OBJDIR)/%.o: $(SRCDIR)/%.c
