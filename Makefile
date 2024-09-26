@@ -6,12 +6,13 @@
 #    By: Pablo Escobar <sataniv.rider@gmail.com>    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/08/28 17:12:44 by Pablo Escob       #+#    #+#              #
-#    Updated: 2024/09/14 16:09:37 by Pablo Escob      ###   ########.fr        #
+#    Updated: 2024/09/26 23:21:48 by Pablo Escob      ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
 NAME = getnearprime
 LIBNAME = lib$(NAME).a
+LIBNAMEFULL	= lib$(NAME)full.a 
 TESTFILE = test.c
 
 SRCDIR = src
@@ -36,11 +37,13 @@ LFLAGS = $(LIBF_FT) $(LIBF_FTPOW)
 
 LOPT = -o2
 
-.PHONY: all, re, run, clean, fclean
+.PHONY: all, re, run, clean, fclean, lib, libfull
 
 all: lib
 
 lib: $(LIBNAME)
+
+libfull: $(LIBNAMEFULL)
 
 run: lib
 	@$(CC) $(CFLAGSO) $(TESTFILE) $(OBJ) $(LFLAGS) $(LOPT) -o $(TESTNAME)
@@ -54,7 +57,7 @@ clean:
 fclean: clean
 	$(MAKE) -C $(LIBFTDIR) fclean
 	$(MAKE) -C $(FT_POW_DIR) fclean
-	rm -f $(TESTNAME) $(LIBNAME)
+	rm -f $(TESTNAME) $(LIBNAME) $(LIBNAMEFULL)
 
 re: fclean all
 
@@ -63,6 +66,12 @@ $(LIBNAME): $(OBJ)
 	$(MAKE) -C $(FT_POW_DIR)
 	ar -rc $(LIBNAME) $(OBJ) $(FT_POW_DIR)/$(OBJDIR)/*.o
 	ranlib $(LIBNAME)
+
+$(LIBNAMEFULL): $(OBJ)
+	$(MAKE) -C $(LIBFTDIR)
+	$(MAKE) -C $(FT_POW_DIR)
+	ar -rc $@ $(OBJ) $(FT_POW_DIR)/$(OBJDIR)/*.o $(LIBFTDIR)/$(OBJDIR)/*.o
+	ranlib $@
 
 $(OBJDIR)/%.o: $(SRCDIR)/%.c
 	@mkdir -p $(OBJDIR)
