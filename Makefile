@@ -6,13 +6,12 @@
 #    By: Pablo Escobar <sataniv.rider@gmail.com>    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/08/28 17:12:44 by Pablo Escob       #+#    #+#              #
-#    Updated: 2024/09/26 23:21:48 by Pablo Escob      ###   ########.fr        #
+#    Updated: 2024/09/28 21:47:55 by Pablo Escob      ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
 NAME = getnearprime
 LIBNAME = lib$(NAME).a
-LIBNAMEFULL	= lib$(NAME)full.a 
 TESTFILE = test.c
 
 SRCDIR = src
@@ -46,7 +45,7 @@ lib: $(LIBNAME)
 libfull: $(LIBNAMEFULL)
 
 run: lib
-	@$(CC) $(CFLAGSO) $(TESTFILE) $(OBJ) $(LFLAGS) $(LOPT) -o $(TESTNAME)
+	@$(CC) $(CFLAGSO) $(TESTFILE) -L. -l$(NAME) -o $(TESTNAME)
 	./$(TESTNAME) 1000
 
 clean:
@@ -64,14 +63,8 @@ re: fclean all
 $(LIBNAME): $(OBJ)
 	$(MAKE) -C $(LIBFTDIR)
 	$(MAKE) -C $(FT_POW_DIR)
-	ar -rc $(LIBNAME) $(OBJ) $(FT_POW_DIR)/$(OBJDIR)/*.o
-	ranlib $(LIBNAME)
-
-$(LIBNAMEFULL): $(OBJ)
-	$(MAKE) -C $(LIBFTDIR)
-	$(MAKE) -C $(FT_POW_DIR)
 	ar -rc $@ $(OBJ) $(FT_POW_DIR)/$(OBJDIR)/*.o $(LIBFTDIR)/$(OBJDIR)/*.o
-	ranlib $@
+	ranlib $(LIBNAME)
 
 $(OBJDIR)/%.o: $(SRCDIR)/%.c
 	@mkdir -p $(OBJDIR)
