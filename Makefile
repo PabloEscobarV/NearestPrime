@@ -6,7 +6,7 @@
 #    By: Pablo Escobar <sataniv.rider@gmail.com>    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/08/28 17:12:44 by Pablo Escob       #+#    #+#              #
-#    Updated: 2024/09/28 21:47:55 by Pablo Escob      ###   ########.fr        #
+#    Updated: 2024/09/28 21:51:42 by Pablo Escob      ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -56,7 +56,7 @@ clean:
 fclean: clean
 	$(MAKE) -C $(LIBFTDIR) fclean
 	$(MAKE) -C $(FT_POW_DIR) fclean
-	rm -f $(TESTNAME) $(LIBNAME) $(LIBNAMEFULL)
+	rm -f $(TESTNAME) $(LIBNAME)
 
 re: fclean all
 
